@@ -25,7 +25,8 @@ jobs:
         run: |
           git remote add hub https://AndrOidBB7:$HF_TOKEN@huggingface.co/spaces/AndrOidBB7/Search_Engine_LLM
           git fetch hub main
-          git merge hub/main --allow-unrelated-histories || true
+          # Merge Hugging Face changes into GitHub changes (prefer GitHub if conflicts)
+          git merge hub/main --strategy-option ours || true
 
       - name: Push to Hugging Face
         env:
